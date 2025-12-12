@@ -5,44 +5,42 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         Authentication auth = new Authentication();
-        while(true){
-            System.out.println("Меню");
-            System.out.println("1. Регистрация");
-            System.out.println("2. Вход");
-            System.out.println("3. Выход");
-            System.out.print("Выберите действие (1-3): ");
-            String choice = scanner.nextLine();
-            switch (choice){
-                case "1":
-                    System.out.println("\n--- РЕГИСТРАЦИЯ ---");
-                    System.out.print("Введите имя: ");
-                    String name = scanner.nextLine();
+        while (true) {
+            System.out.println("меню");
+            System.out.println("1. регистрация");
+            System.out.println("2. вход в аккаунт");
+            System.out.println("3. выход из меню");
+            System.out.print("выберите опцию (1-3):");
 
-                    System.out.print("Введите логин: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.print("введите логин: ");
                     String login = scanner.nextLine();
-
-                    System.out.print("Введите пароль: ");
+                    System.out.print("введите пароль: ");
                     String password = scanner.nextLine();
-
-                    auth.registerUser(name, login, password);
+                    auth.registerUser(login, password);
                     break;
-                case "2":
 
-                    System.out.println("\n--- ВХОД В СИСТЕМУ ---");
-                    System.out.print("Введите логин: ");
-                    String loginEnter = scanner.nextLine();
+                case 2:
+                    System.out.print("введите логин: ");
+                    String loginLogin = scanner.nextLine();
 
-                    System.out.print("Введите пароль: ");
-                    String passwordEnter = scanner.nextLine();
+                    System.out.print("введите пароль: ");
+                    String loginPassword = scanner.nextLine();
 
-                    boolean success = auth.login(loginEnter, passwordEnter);
+                    boolean loginSuccess = auth.login(loginLogin, loginPassword);
 
-                    if (success) {
-                        System.out.println("Вы успешно вошли");
+                    if (loginSuccess) {
+                        System.out.println("вход в систему");
                     }
+
                     break;
-                case "3":
-                    System.out.println("До свидания!");
+
+                case 3:
                     scanner.close();
                     return;
             }
