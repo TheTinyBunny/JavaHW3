@@ -2,12 +2,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.HashMap;
 
 public class Authentication{
 
-    private HashMap<String, String> users = new HashMap<>();
+    private Map<String, String> users = new HashMap<>();
 
     public void registerUser(String username, String password){
 
@@ -27,7 +28,7 @@ public class Authentication{
             System.out.println(e);
         }
     }
-
+    //никогда не хранить пароли в том виде, в котором нам их передают. Придумать, как храню.
     public boolean login(String username, String password){
         String stored = users.get(username);
         if(stored == null){
@@ -35,7 +36,7 @@ public class Authentication{
             return false;
         }
         if(!stored.equals(password)){
-            System.out.println("вы успешно не залогинились");
+            System.out.println("вы не залогинились");
             return false;
         }
 
