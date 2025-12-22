@@ -17,11 +17,7 @@ public class GameAuth {
     }
 
     public void loadCharacters() {
-        // удалить !!!!!!!!!!!!!
-        // насколько вообще правильно делать так? я ведь создаю новый обьект класса каждый раз, когда я подтягиваю
-        // сохранения, это просто не может быть правильно, как это исправить? - пока без идей, совсем не понимаю
-        // можно исправить, наверное, если хранить где то отдельно только названия персонажей, а при выборе уже
-        // подтаскивать нужного перса, но это опять же обращение к БД, что лучше? ( вопросы самому себе )
+        // нужно переписывать много работы с памятью
         File folder = new File("Characters");
         File[] files = folder.listFiles();
 
@@ -30,6 +26,7 @@ public class GameAuth {
             return;
         }
         //не нужно загружать всех персонажей, можно грузить только нужного нам, реализовать через выбор среди имен файлов
+        // это переписать !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         for (File file : files) {
 
             try {
@@ -62,7 +59,7 @@ public class GameAuth {
 
         Char character = new Char(username, password);
         allChars.put(username, character);
-
+        // это не понял совсем совершенно нихуя не понял
 //        saveCharacter(character);
         charService.createChar(character);
         //тут мы вынесли действие в отдельный класс
@@ -110,12 +107,13 @@ public class GameAuth {
     public void saveCharacter(Char character) {
         saveToFile(character.getName(), character.getPassword(), character.getHealth(), character.getLevel());
     }
-
+    //пока лишнее, потом
     // заделка под изменение персонажа и запись об этом в бд - будет ли оно в реальном времени работать? наверное да.
     public void updateCharacter(Char character) {
         allChars.put(character.getName(), character);
         saveCharacter(character);
     }
+    // тоже лишнее, потом 
     // задекла под то, что чара можно удалить
     public void deleteCharacter(Char character) {
         allChars.remove(character.getName());
