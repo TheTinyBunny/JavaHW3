@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class MainGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         GameAuth auth = new GameAuth();
 
         System.out.println("Загружено персонажей: " + auth.allChars.size());
@@ -16,6 +15,7 @@ public class MainGame {
             System.out.println("3. Показать всех персонажей");
             System.out.println("4. Выйти");
             System.out.print("Выбери: ");
+            //некрасиво и неправильно, можно написать в отдельном месте, еще и не писать строчка за строчкой - переделать
 
             String choice = scanner.nextLine();
 
@@ -67,6 +67,7 @@ public class MainGame {
                         System.out.println("Здоровье: " + character.health);
                         System.out.println("------------------");
                     }
+                    // сюда нужно выводить view, тк это еще view обьект, вот тут пригодятся рекорды
                 }
 
             } else if (choice.equals("4")) {
