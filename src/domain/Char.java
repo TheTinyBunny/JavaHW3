@@ -1,7 +1,12 @@
 package domain;
 
-public class Char {
-    public String name;
+import java.io.Serializable;
+
+// иммутабельность рекорда позволяет ему быть универсальным, тут переписать все как рекорд, DTO - ?, в основном их
+// использовать, обычный класс только если оно требуется.
+// сериализация и десериализация из байта в байты и обратно, а так же перевод из json формата.
+public class Char implements Serializable {
+    public final String name;
     public String password;
     public int health;
     public int level;

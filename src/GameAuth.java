@@ -1,8 +1,14 @@
 import domain.Char;
+import service.CharService;
+import service.CharServiceImpl;
+
 import java.io.*;
 import java.util.*;
 
 public class GameAuth {
+
+    CharService charService = new CharServiceImpl();
+
 
     HashMap<String, Char> allChars = new HashMap<>();
 
@@ -23,7 +29,7 @@ public class GameAuth {
             System.err.println("Error: Characters file could not be found.");
             return;
         }
-
+        //не нужно загружать всех персонажей, можно грузить только нужного нам, реализовать через выбор среди имен файлов
         for (File file : files) {
 
             try {
@@ -47,7 +53,7 @@ public class GameAuth {
             }
         }
     }
-
+    //паттерн MVC (применяется в спринге)
     public Char register(String username, String password) {
         if (allChars.containsKey(username)) {
             System.out.println("Такой персонаж уже существует");
@@ -57,7 +63,9 @@ public class GameAuth {
         Char character = new Char(username, password);
         allChars.put(username, character);
 
-        saveCharacter(character);
+//        saveCharacter(character);
+        charService.createChar(character);
+        //тут мы вынесли действие в отдельный класс
 
         System.out.println("Новый персонаж " + username + " создан");
         return character;
