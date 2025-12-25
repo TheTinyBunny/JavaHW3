@@ -9,11 +9,7 @@ import view.CharacterView;
 
 public class MainGame {
     public static void main(String[] args) {
-        CharacterRepo repository = new CharacterRepoImpl();
-        GameAuthImpl authService = new GameAuthImpl(repository);
-        GameView gameView = new GameView();
-        CharacterView characterView = new CharacterView();
-        GameController controller = new GameController(authService, gameView, characterView, repository);
+        GameController controller = new GameController();
         controller.start();
     }
 }

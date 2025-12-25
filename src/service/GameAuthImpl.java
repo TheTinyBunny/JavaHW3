@@ -2,6 +2,7 @@ package service;
 
 import domain.Character;
 import repository.CharacterRepo;
+import repository.CharacterRepoImpl;
 
 public class GameAuthImpl implements GameAuth {
 
@@ -14,13 +15,13 @@ public class GameAuthImpl implements GameAuth {
     @Override
     public Character register(String username, String password) {
         if (repository.findByName(username) != null) {
-            //надпись что такой персонаж существует
+            System.out.println("Username already exists!");
             return null;
         }
 
         Character character = new Character(username, password);
         repository.save(character);
-        // надпись о создании перса
+        System.out.println("Character registered successfully!");
         return character;
     }
 
@@ -29,16 +30,16 @@ public class GameAuthImpl implements GameAuth {
         Character character = repository.findByName(username);
 
         if (character == null) {
-            // надпись что такого перса нет
+            System.out.println("Username not found!");
             return null;
         }
 
         if (!character.password().equals(password)) {
-            // надпись что пароль неверный
+            System.out.println("Wrong password!");
             return null;
         }
 
-        //надпись что вход состоялся
+        System.out.println("Logged in successfully!");
         return character;
     }
 }

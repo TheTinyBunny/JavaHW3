@@ -59,8 +59,8 @@ public class CharacterRepoImpl implements CharacterRepo {
     public void safeToFile(Character character) {
 
         try {
-
-            File file = new File("Characters/" + character.name() + ".txt");
+            String template = "Characters/%s.txt";
+            File file = new File(template.formatted(character.name()));
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
 

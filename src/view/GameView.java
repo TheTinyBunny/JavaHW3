@@ -1,4 +1,6 @@
 package view;
+import dictionary.ViewTemplate;
+
 import java.util.Scanner;
 
 public class GameView {
@@ -10,12 +12,7 @@ public class GameView {
     }
 
     public void showMenu(){
-        System.out.println("\n--- МЕНЮ ---");
-        System.out.println("1. Создать персонажа");
-        System.out.println("2. Войти в игру");
-        System.out.println("3. Показать всех персонажей");
-        System.out.println("4. Выйти");
-        System.out.print("Выбери: ");
+        System.out.print(ViewTemplate.MENU.getValue());
     }
 
     public String readLine(){
@@ -32,20 +29,20 @@ public class GameView {
     }
 
     public void showError(String error) {
-        System.out.println("Ошибка: " + error);
+        System.out.println(ViewTemplate.ERROR.getValue().formatted(error));
     }
 
     public void showSuccess(String message) {
-        System.out.println("это ок " + message);
+        System.out.println(ViewTemplate.SUCCESS.getValue().formatted(message));
     }
 
     public String askForUsername() {
-        System.out.print("Введи имя персонажа: ");
+        System.out.print(ViewTemplate.LOGIN.getValue());
         return scanner.nextLine();
     }
 
     public String askForPassword() {
-        System.out.print("Введи пароль: ");
+        System.out.print(ViewTemplate.PASSWORD.getValue());
         return scanner.nextLine();
     }
 }

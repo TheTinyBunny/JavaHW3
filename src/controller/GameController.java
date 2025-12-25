@@ -1,4 +1,6 @@
 package controller;
+import repository.CharacterRepoImpl;
+import service.GameAuth;
 import service.GameAuthImpl;
 import view.GameView;
 import view.CharacterView;
@@ -11,6 +13,19 @@ public class GameController {
     private final CharacterView characterView;
     private final CharacterRepo repository;
 
+
+//    GameAuth authService = new GameAuthImpl();
+//    GameView gameView = new GameView();
+//    CharacterView characterView = new CharacterView();
+    // я не понимаю, почему моя реализация неправильная и что тут нужно исправить
+
+    public GameController() {
+        // Создаем все зависимости здесь
+        this.repository = new CharacterRepoImpl();
+        this.authService = new GameAuthImpl(repository);
+        this.gameView = new GameView();
+        this.characterView = new CharacterView();
+    }
     public GameController(GameAuthImpl authService, GameView gameView,
                           CharacterView characterView, CharacterRepo repository) {
         this.authService = authService;
@@ -22,27 +37,22 @@ public class GameController {
     public void start() {
         gameView.showMessage("Загружено персонажей: " + repository.count());
 
-        while (true) {
+        boolean isActive = true;
+        while (isActive) {
+
             gameView.showMenu();
             String choice = gameView.readLine();
-            switch (choice) {
-                case "1":
-                    createCharacter();
-                    break;
-                case "2":
-                    loginCharacter();
-                    break;
-                case "3":
-                    showAllCharacters();
-                    break;
-                case "4":
-                    gameView.showMessage("Выход.");
-                    return;
-                default:
-                    gameView.showError("Неверный выбор!");
-                    break;
-            }
 
+            switch (choice) {
+                case "1" -> createCharacter();
+                case "2" -> loginCharacter();
+                case "3" -> showAllCharacters();
+                case "4" -> {
+                    gameView.showMessage("Выход.");
+                    isActive = false;
+                }
+                default -> gameView.showError("Неверный выбор!");
+            }
         }
     }
 
@@ -69,7 +79,6 @@ public class GameController {
             gameView.showError("ошибка при входе?");
         }
     }
-
     private void showAllCharacters(){
         List<Character> allCharacters = repository.findAll();
         characterView.showAllCharacters(allCharacters);

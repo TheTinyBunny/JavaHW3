@@ -1,4 +1,5 @@
 package view;
+import dictionary.ViewTemplate;
 import domain.Character;
 
 import java.util.List;
@@ -6,29 +7,28 @@ import java.util.List;
 public class CharacterView {
 
     public void showCharacter(Character character) {
-        System.out.println("\n=== ИНФОРМАЦИЯ О ПЕРСОНАЖЕ ===");
-        System.out.println("Имя: " + character.name());
-        System.out.println("Здоровье: " + character.health());
-        System.out.println("Уровень: " + character.level());
-        System.out.println("=============================");
+        String formatted = ViewTemplate.STATS.getValue().formatted(character.name(), character.health(), character.level());
+        System.out.println(formatted);
     }
 
     public void showAllCharacters(List<Character> characters) {
-        System.out.println("\n=== ВСЕ ПЕРСОНАЖИ ===");
+        System.out.println(ViewTemplate.CHARACTERS_HEADER.getValue());
 
         if (characters.isEmpty()) {
-            System.out.println("Нет персонажей.");
+            System.out.println(ViewTemplate.NO_CHARACTERS.getValue());
             return;
         }
 
-        System.out.println("Всего: " + characters.size());
-        System.out.println("------------------");
+        String template = ViewTemplate.CHARACTERS_COUNT.getValue().formatted(characters.size());
+        System.out.println(template);
 
         for (Character character : characters) {
-            System.out.println("Имя: " + character.name());
-            System.out.println("Уровень: " + character.level());
-            System.out.println("Здоровье: " + character.health());
-            System.out.println("------------------");
+            String formatted = ViewTemplate.STATS.getValue().formatted(
+                    character.name(),
+                    character.health(),
+                    character.level()
+            );
+            System.out.println(formatted);
         }
     }
 }
